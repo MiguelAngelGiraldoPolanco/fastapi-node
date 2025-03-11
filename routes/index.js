@@ -1,0 +1,26 @@
+const express =require('express');
+
+const productsRouter = require('./productsRouter');
+const usersRouter = require('./usersRouter');
+const categoriesRouter = require('./categoriesRouter');
+
+function routerApi(app) {
+  const router = express.Router();  // esto se hace por si mi api tiene muchas versiones para no tener que cambiar cada uno de lo srouter
+                                    // y solo con la primera app.use puedo modificar cada una de las rutas o cambiar a versiones diferentes en el futuro como en el ejemplo de abajo
+  app.use('/api/v1',router)
+
+  router.use('/products', productsRouter);
+  router.use('/users', usersRouter);
+  router.use('/categories', categoriesRouter);
+
+
+  //ejemplo otras versiones de la api   para esto necesitas otro index que maneje la version 2
+  // const router2 = express.Router();
+  // app.use('/api/v2',router)
+
+  // router.use('/products', productsRouter);
+  // router.use('/users', usersRouter);
+  // router.use('/categories', categoriesRouter);
+}
+
+module.exports = routerApi;
