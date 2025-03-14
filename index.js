@@ -11,19 +11,19 @@ app.use(express.json());
 
 const whitelist = ['http://localhost:8080', 'https://myapp.com']; // esta es la lista de los dominios que tienen acceso a mi api
 
-const opctions = { // aqui verificamos que los dominios que se ingresen sean los que estan definidos como permitidos
-  origin: (origin, callback) => {
-    if(whitelist.includes(origin || !origin)){
-      callback(null,true);
-    }else {
-      callback(new Error('acceso no permitido'));
-    }
-  }
-}
+// const opctions = { // aqui verificamos que los dominios que se ingresen sean los que estan definidos como permitidos
+//   origin: (origin, callback) => {
+//     if(whitelist.includes(origin || !origin)){
+//       callback(null,true);
+//     }else {
+//       callback(new Error('acceso no permitido'));
+//     }
+//   }
+// }
 
-app.use(cors(opctions)); // aqui verifica los permisos a los dominios que le di acceso
+// app.use(cors(opctions)); // aqui verifica los permisos a los dominios que le di acceso
 
-// app.use(cors()); // esto le da acceso a cualquiera que pisa solicitud a la api
+app.use(cors()); // esto le da acceso a cualquiera que pida solicitud a la api
 
 app.get('/', (req, res) => {
   res.send('Hola soy macarena y miguel y diana!');
