@@ -6,18 +6,18 @@ const validatorHandler = require('./../middlewares/validatorHandler');
 const router = express.Router();
 const service = new UsersService();
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   try {
-    const users = service.find();
-    res.json(users);
+    const users = await service.find();  // Usa await para resolver la promesa
+    res.json(users);  // Ahora 'users' tiene los datos de la consulta
   } catch (error) {
-    next(error);
+    next(error);  // Pasar el error al manejador de errores de Express
   }
 });
 
 router.get('/:id',
   validatorHandler(getUserSchema, "params"),
-  async (req, res) => {
+  async (req, res, next) => {
   try {
     const { id } = req.params;
     const user = service.findOne(id);
@@ -29,7 +29,7 @@ router.get('/:id',
 
 router.post('/',
   validatorHandler(createUserSchema, "body"),
-  async (req, res)=>{
+  async (req, res, next)=>{
     try {
       const body = req.body;
       const newUser = service.create(body);
@@ -42,7 +42,7 @@ router.post('/',
 router.patch('/:id',
   validatorHandler(getUserSchema, 'params'),
   validatorHandler(updateUserSchema, 'body'),
-  async (req, res)=>{
+  async (req, res , next)=>{
   try {
     const { id } = req.params;
     const body = req.body;
