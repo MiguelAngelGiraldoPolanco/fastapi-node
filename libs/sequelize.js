@@ -5,20 +5,17 @@ const setupModels = require('../db/models');
 
 const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
+// url postgres
 const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
 
-// const sequelize = new Sequelize(URI, {
-//   dialect: 'postgres',
-//   logging: true,
-// });
+// conexion a postgres
 
-const sequelize = new Sequelize('postgres://miguel:admin123@localhost:5432/my_store', {
+const sequelize = new Sequelize(URI, {
   dialect: 'postgres',
   logging: true,
 });
 
-setupModels(sequelize);
 
-sequelize.sync();
+setupModels(sequelize);
 
 module.exports = sequelize;

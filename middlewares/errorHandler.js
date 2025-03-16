@@ -1,3 +1,6 @@
+const { ValidationError } = require("sequelize");
+const boom = require('@hapi/boom');
+
 function logErrors( err, req, res, next){ // este middleware se encarga de mostrar por ocnsola en error
   console.error(err);
   next(err);
@@ -19,7 +22,17 @@ function boomErrorHandler( err, req, res, next){
   }
 }
 
+function ormErrorHandler( err, req, res, next){
+  if (err instanceof ValidationError){
+    res.status(409).json({
+      statusCode : 409,
+      message: err.name,
+      errors: err.errors
+    });
+  }
+}
 
-module.exports = { logErrors , errorHandler, boomErrorHandler };
+
+module.exports = { logErrors , errorHandler, boomErrorHandler, ormErrorHandler };
 
 

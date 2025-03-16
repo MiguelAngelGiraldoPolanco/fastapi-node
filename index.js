@@ -1,7 +1,7 @@
 const express = require('express');
 const routerApi = require('./routes');
 const cors = require('cors');
-const { logErrors , errorHandler, boomErrorHandler } = require('./middlewares/errorHandler');
+const { logErrors , errorHandler, boomErrorHandler, ormErrorHandler } = require('./middlewares/errorHandler');
 
 
 const app = express();
@@ -37,6 +37,7 @@ routerApi(app);
 // deben declararse despues de router despues que la app este levantada
 // deben ir en orden segun nos interese en este caso el errorhandler no tiene next y mata la app
 app.use(logErrors);
+app.use(ormErrorHandler);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 
