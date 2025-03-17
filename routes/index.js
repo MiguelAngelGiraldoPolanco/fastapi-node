@@ -3,6 +3,7 @@ const express =require('express');
 const productsRouter = require('./productsRouter');
 const usersRouter = require('./usersRouter');
 const categoriesRouter = require('./categoriesRouter');
+const costomersRouter = require('./costomersRouter');
 
 function routerApi(app) {
   const router = express.Router();  // esto se hace por si mi api tiene muchas versiones para no tener que cambiar cada uno de lo srouter
@@ -12,6 +13,7 @@ function routerApi(app) {
   router.use('/products', productsRouter);
   router.use('/users', usersRouter);
   router.use('/categories', categoriesRouter);
+  router.use('/costomers', costomersRouter);
 
 
   //ejemplo otras versiones de la api   para esto necesitas otro index que maneje la version 2
