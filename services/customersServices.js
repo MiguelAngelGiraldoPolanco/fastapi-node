@@ -1,23 +1,26 @@
-const { faker } = require('@faker-js/faker');
-
 const { models }= require('../libs/sequelize')
 
-class CostomersService{
+class CustomersService{
 
   constructor(){}
 
   async create(data){
-      const newCostomer = await models.Costomer.create(data);
+      // const newUser = await models.User.create(data.user);
+      const newCostomer = await models.Customer.create(data, {
+        include: ['user']
+    });
       return newCostomer;
   }
    // ejemplo de como conectar y hacer una consulta a la base de datos que tengo en libs postgres.js
   async find(){
-      const rta = await models.Costomer.findAll();
+      const rta = await models.Customer.findAll({
+        include: ['user']
+      });
       return rta;  // Retorna los usuarios encontrados.
   }
 
   async findOne(id){
-      const costomer = await models.Costomer.findByPk(id);
+      const costomer = await models.Customer.findByPk(id);
       if (!costomer) {
         throw boom.notFound('User not found');
       }
@@ -37,4 +40,4 @@ class CostomersService{
   }
 }
 
-module.exports = CostomersService;
+module.exports = CustomersService;

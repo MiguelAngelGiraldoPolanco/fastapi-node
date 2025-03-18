@@ -12,7 +12,9 @@ class UsersService{
   }
    // ejemplo de como conectar y hacer una consulta a la base de datos que tengo en libs postgres.js
   async find(){
-      const rta = await models.User.findAll();
+      const rta = await models.User.findAll({
+        include: 'customer'
+      });
       return rta;  // Retorna los usuarios encontrados.
   }
 

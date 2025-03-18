@@ -2,9 +2,9 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 
 const { USER_TABLE } = require('./user.model');
 
-const COSTOMER_TABLE = 'costomers';
+const CUSTOMER_TABLE = 'customers';
 
-const CostomerSchema = {
+const CustomerSchema = {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -34,6 +34,7 @@ const CostomerSchema = {
     field: 'user_id',
     allowNull: false,
     type: DataTypes.INTEGER,
+    unique: true,
     references: {
       model: USER_TABLE,
       key: 'id'
@@ -43,7 +44,7 @@ const CostomerSchema = {
   },
 }
 
-class Costomer extends Model {
+class Customer extends Model {
   static associate(models) {
     this.belongsTo(models.User, {as: 'user'});
   }
@@ -51,11 +52,11 @@ class Costomer extends Model {
   static config(sequelize){
     return {
       sequelize,
-      tableName : COSTOMER_TABLE,
-      modelName: 'Costomer',
+      tableName : CUSTOMER_TABLE,
+      modelName: 'Customer',
       timestamps: false
     }
   }
 }
 
-module.exports = { COSTOMER_TABLE, CostomerSchema, Costomer }
+module.exports = { CUSTOMER_TABLE, CustomerSchema, Customer }
