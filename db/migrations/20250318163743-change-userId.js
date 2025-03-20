@@ -1,11 +1,11 @@
 'use strict';
 const { DataTypes } = require('sequelize');
-const { COSTOMER_TABLE } = require('../models/costomer.model');
+const { CUSTOMER_TABLE } = require('../models/customer.model');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface) {
-    await queryInterface.changeColumn(COSTOMER_TABLE, 'user_id',{
+    await queryInterface.changeColumn(CUSTOMER_TABLE, 'user_id',{
       field: 'user_id',
           allowNull: false,
           type: DataTypes.INTEGER,
@@ -14,6 +14,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable(COSTOMER_TABLE);
+    await queryInterface.dropTable(CUSTOMER_TABLE);
   }
 };
