@@ -16,7 +16,9 @@ async find(){
 }
 
 async findOne(id){
-  const category = await models.Category.findByPk(id);
+  const category = await models.Category.findByPk(id, {
+    include: ['products']
+  });
   if (!category) {
     throw boom.notFound('Category not found');
   }
@@ -25,7 +27,7 @@ async findOne(id){
 
 async update(id, changes){
   const category = await this.findOne(id);
-  const rta = await category.update(changes);
+  const rta = category.update(changes);
   return rta;
 }
 

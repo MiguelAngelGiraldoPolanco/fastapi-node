@@ -36,7 +36,7 @@ class Category extends Model{
   static config(sequelize){
     return {
       sequelize,
-      tableName: CATEGOTY_TABLE,
+      tableName: CATEGORY_TABLE,
       modelName: 'Category',
       timestamps: false
     }
