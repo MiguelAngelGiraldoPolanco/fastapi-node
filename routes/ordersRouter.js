@@ -1,6 +1,6 @@
 const express = require('express');
 const OrderService = require('./../services/ordersServices');
-const { getOrderSchema ,createOrderSchema, addItemSchema } = require('./../schemas/orderSchema');
+const { getOrderSchema ,createOrderSchema, addItemSchema,  } = require('./../schemas/orderSchema');
 const validatorHandler = require('./../middlewares/validatorHandler');
 
 const router = express.Router();
