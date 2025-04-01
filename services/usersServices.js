@@ -1,5 +1,5 @@
 const boom = require('@hapi/boom');
-
+const bcrypt = require('bcrypt');
 const { models }= require('../libs/sequelize')
 
 class UsersService{
@@ -7,7 +7,12 @@ class UsersService{
   constructor(){}
 
   async create(data){
-      const newUser = await models.User.create(data);
+      const hash = await bcrypt.hash(data.password, 10);
+      const newUser = await models.User.create({
+        ...data,
+        password: hash,
+      });
+      delete newUser.dataValues.password; // Eliminar el campo password del objeto devuelto
       return newUser;
   }
    // ejemplo de como conectar y hacer una consulta a la base de datos que tengo en libs postgres.js
