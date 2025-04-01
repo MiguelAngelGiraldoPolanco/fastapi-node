@@ -2,7 +2,7 @@ const express = require('express');
 const routerApi = require('./routes');
 const cors = require('cors');
 const { logErrors , errorHandler, boomErrorHandler, ormErrorHandler } = require('./middlewares/errorHandler');
-
+const { checkApiKey } = require('./middlewares/authHandler');
 
 const app = express();
 const port = process.env.PORT || 3005;
