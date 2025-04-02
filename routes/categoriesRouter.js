@@ -1,7 +1,10 @@
 const express = require('express');
+const passport = require('passport');
+
 const CategoriesService = require('./../services/categoriesServices');
 const { createCategorySchema ,updateCategorySchema, getCategorySchema }= require('./../schemas/categorySchema');
 const validatorHandler = require('./../middlewares/validatorHandler');
+const passport = require('passport');
 
 
 const router = express.Router();
@@ -30,6 +33,7 @@ router.get('/:id',
 });
 
 router.post('/',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(createCategorySchema, 'body'),
   async (req, res, next)=>{
     try {
@@ -43,6 +47,7 @@ router.post('/',
 });
 // este es el ejemplo de como se usa asyn await esto deben tenerlo todos y las clases tambien
 router.patch('/:id',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(getCategorySchema, 'params'),
   validatorHandler(updateCategorySchema, 'body'),
   async (req, res, next)=>{
@@ -57,6 +62,7 @@ router.patch('/:id',
 });
 
 router.delete('/:id',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(getCategorySchema, 'params'),
   async (req, res, next)=>{
   try {
