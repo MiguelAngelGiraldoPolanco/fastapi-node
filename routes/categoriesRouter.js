@@ -4,13 +4,16 @@ const passport = require('passport');
 const CategoriesService = require('./../services/categoriesServices');
 const { createCategorySchema ,updateCategorySchema, getCategorySchema }= require('./../schemas/categorySchema');
 const validatorHandler = require('./../middlewares/validatorHandler');
-const passport = require('passport');
+const { checkAdminRole, checkRoles } = require('./../middlewares/authHandler');
 
 
 const router = express.Router();
 const service = new CategoriesService();
 
-router.get('/',  async (req, res, next) => {
+router.get('/',
+  passport.authenticate('jwt', {session: false}),
+  checkRoles('admin', 'customer'),
+  async (req, res, next) => {
   try {
     const categories =  await service.find();
     res.json(categories);
@@ -20,6 +23,8 @@ router.get('/',  async (req, res, next) => {
 });
 
 router.get('/:id',
+  passport.authenticate('jwt', {session: false}),
+  checkRoles('admin', 'customer'),
   validatorHandler(getCategorySchema, 'params'),
   async (req, res, next) => {
     try {
@@ -34,6 +39,7 @@ router.get('/:id',
 
 router.post('/',
   passport.authenticate('jwt', { session: false }),
+  checkRoles('admin'),
   validatorHandler(createCategorySchema, 'body'),
   async (req, res, next)=>{
     try {
@@ -48,6 +54,7 @@ router.post('/',
 // este es el ejemplo de como se usa asyn await esto deben tenerlo todos y las clases tambien
 router.patch('/:id',
   passport.authenticate('jwt', { session: false }),
+  checkRoles('admin'),
   validatorHandler(getCategorySchema, 'params'),
   validatorHandler(updateCategorySchema, 'body'),
   async (req, res, next)=>{
@@ -63,6 +70,7 @@ router.patch('/:id',
 
 router.delete('/:id',
   passport.authenticate('jwt', { session: false }),
+  checkRoles('admin'),
   validatorHandler(getCategorySchema, 'params'),
   async (req, res, next)=>{
   try {

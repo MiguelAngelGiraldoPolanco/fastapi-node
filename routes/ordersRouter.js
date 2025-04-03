@@ -20,16 +20,18 @@ router.get('/:id',
 
 router.post('/',
   passport.authenticate('jwt', { session: false }),
-  validatorHandler(createOrderSchema, "body"),
-  async (req, res, next)=>{
+  async (req, res, next) => {
     try {
-      const body = req.body;
+      const body = {
+        userId: req.user.sub
+      }
       const newOrder = await service.create(body);
       res.status(201).json(newOrder);
-    } catch (error) {
-      next(error);
+    } catch (err) {
+      next(err);
     }
-});
+  }
+);
 
 router.post('/add-item',
   validatorHandler(addItemSchema, "body"),
