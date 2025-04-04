@@ -5,6 +5,8 @@ const usersRouter = require('./usersRouter');
 const categoriesRouter = require('./categoriesRouter');
 const customersRouter = require('./customersRouter');
 const ordersRouter = require('./ordersRouter');
+const authRouter = require('./authRouter');
+const profileRouter = require('./profileRouter');
 
 function routerApi(app) {
   const router = express.Router();  // esto se hace por si mi api tiene muchas versiones para no tener que cambiar cada uno de lo srouter
@@ -16,6 +18,8 @@ function routerApi(app) {
   router.use('/categories', categoriesRouter);
   router.use('/customers', customersRouter);
   router.use('/orders', ordersRouter);
+  router.use('/auth', authRouter);
+  router.use('/profile', profileRouter);
 }
 
 module.exports = routerApi;

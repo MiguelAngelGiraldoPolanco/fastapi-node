@@ -2,7 +2,7 @@ const express = require('express');
 const routerApi = require('./routes');
 const cors = require('cors');
 const { logErrors , errorHandler, boomErrorHandler, ormErrorHandler } = require('./middlewares/errorHandler');
-
+const { checkApiKey } = require('./middlewares/authHandler');
 
 const app = express();
 const port = process.env.PORT || 3005;
@@ -25,8 +25,10 @@ const whitelist = ['http://localhost:8080', 'https://myapp.com']; // esta es la 
 
 app.use(cors()); // esto le da acceso a cualquiera que pida solicitud a la api
 
+require('./utils/auth'); // aqui se inicializa el passport y se carga la estrategia local para que funcione en toda la app
+
 app.get('/', (req, res) => {
-  res.send('Hola soy macarena y miguel y diana!');
+  res.send('Hola soy macarena y miguel!');
 });
 
 app.get('/nombre', (req, res) => {

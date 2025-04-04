@@ -1,5 +1,5 @@
 const { models }= require('../libs/sequelize')
-
+const bcrypt = require('bcrypt');
 const boom = require('@hapi/boom');
 
 class CustomersService{
@@ -7,10 +7,18 @@ class CustomersService{
   constructor(){}
 
   async create(data){
-      // const newUser = await models.User.create(data.user);
-      const newCostomer = await models.Customer.create(data, {
+      const hash = await bcrypt.hash(data.user.password, 10);
+      const newData = {
+        ...data,
+        user: {
+          ...data.user,
+          password: hash,
+        }
+      };
+      const newCostomer = await models.Customer.create(newData, {
         include: ['user']
     });
+      delete newCostomer.user.dataValues.password;
       return newCostomer;
   }
    // ejemplo de como conectar y hacer una consulta a la base de datos que tengo en libs postgres.js

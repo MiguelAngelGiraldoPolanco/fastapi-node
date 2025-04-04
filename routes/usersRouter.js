@@ -54,6 +54,7 @@ router.patch('/:id',
 });
 
 router.delete('/:id',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(getUserSchema, 'params'),
   async (req, res, next)=>{
   try {
