@@ -26,6 +26,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DataTypes.STRING
       },
+      recoveryToken: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull: true,
+        field: 'recovery_token'
+      },
       role: {
         allowNull: false,
         type: Sequelize.DataTypes.STRING,

@@ -28,11 +28,11 @@ app.use(cors()); // esto le da acceso a cualquiera que pida solicitud a la api
 require('./utils/auth'); // aqui se inicializa el passport y se carga la estrategia local para que funcione en toda la app
 
 app.get('/', (req, res) => {
-  res.send('Hola soy macarena y miguel!');
+  res.send('Hola soy miguel !');
 });
 
 app.get('/nombre', (req, res) => {
-  res.send('Hola soy macarena !');
+  res.send('Hola soy miguel!');
 });
 
 routerApi(app);
