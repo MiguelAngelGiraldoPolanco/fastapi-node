@@ -1,30 +1,30 @@
 # FastAPI-Node (Backend API)
 
-Este repositorio contiene una API RESTful desarrollada con Node.js, diseñada para implementar patrones de autenticación y gestión de bases de datos.
+This repository contains a RESTful API developed with Node.js, designed to implement authentication patterns and database management.
 
-## 🚀 Características Técnicas
+## 🚀 Technical Features
 
-* **Autenticación**: Implementación de flujo de login seguro mediante Passport.js y JWT (JSON Web Tokens).
-* **Seguridad**: Gestión de hashing y verificación de contraseñas.
-* **Base de Datos**: Integración de Sequelize como ORM para la administración de datos.
-* **Funcionalidades**:
-    * Operaciones CRUD para productos y categorías.
-    * Lógica de recuperación de contraseñas integrada.
-    * Gestión de perfiles de usuario y órdenes de compra.
+* **Authentication**: Implementation of a secure login flow using Passport.js and JWT (JSON Web Tokens).
+* **Security**: Password hashing and verification management.
+* **Database**: Integration of Sequelize as an ORM for data administration.
+* **Functionalities**:
+    * CRUD operations for products and categories.
+    * Integrated password recovery logic.
+    * User profile and purchase order management.
 
 ## 🛠 Tech Stack
 
 * **Runtime**: Node.js
 * **Framework**: Express.js
 * **ORM**: Sequelize
-* **Seguridad**: Passport.js, JWT, bcrypt
-* **Infraestructura**: Docker Compose
+* **Security**: Passport.js, JWT, bcrypt
+* **Infrastructure**: Docker Compose
 
-## 📁 Estructura del Proyecto
+## 📁 Project Structure
 
-El proyecto está organizado siguiendo el principio de separación de responsabilidades:
+The project is organized following the principle of separation of concerns:
 
-* **routes/**: Definición de endpoints de la API.
-* **services/**: Lógica de negocio y procesos.
-* **db/**: Modelos y configuración de persistencia.
-* **utils/**: Utilidades para autenticación y envío de correos.
+* **routes/**: Definition of API endpoints.
+* **services/**: Business logic and processes.
+* **db/**: Models and persistence configuration.
+* **utils/**: Utilities for authentication and email sending.
